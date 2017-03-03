@@ -20,6 +20,18 @@ public class ServiceTimer extends Service {
     private Timer timer = null;
     private int count = 0;
 
+    private void checkFlag(){
+        HttpGetTask httpGetTask = new HttpGetTask();
+        httpGetTask.severTimer = this;
+        try {
+            httpGetTask.execute(new URL("http://192.168.0.31/state"));
+            Log.d( "TestService" , "EXE" );
+            new HttpGetTask().execute(new URL("http://192.168.0.31/gpio/0"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //音楽の再生。本来、prepareとplayに分けるべきだが面倒なのでとりあえずこうしている。
     public void audioPlay(){
         // インタンスを生成
@@ -66,18 +78,16 @@ public class ServiceTimer extends Service {
                     Log.d( "HIT! TestService" , "count = "+ count );
                 }
                 count++;
+
+               checkFlag();
+
+
             }
-        }, 0, 1000);
+        }, 0, 3000);
 
         //httpをGET--------ここから
         //HttpGetTaskを実行
-        HttpGetTask httpGetTask = new HttpGetTask();
-        httpGetTask.severTimer = this;
-        try {
-            httpGetTask.execute(new URL("http://192.168.0.31/state"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        //checkFlag();
         //httpをGET-------ここまで
 
         //とりあえずのserviceで音楽再生のテスト
