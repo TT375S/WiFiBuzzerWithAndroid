@@ -4,6 +4,8 @@ package com.example.user1.servicetest1;
  * Created by user1 on 2017/03/03.
  */
 
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,6 +21,7 @@ import java.net.URL;
 import static java.sql.Types.NULL;
 
 public final class HttpGetTask extends AsyncTask<URL, Void, String> {
+    public ServiceTimer severTimer;
 
     @Override
     protected String doInBackground(URL... urls) {
@@ -44,6 +47,10 @@ public final class HttpGetTask extends AsyncTask<URL, Void, String> {
                 in.read(bodyByte);
                 in.close();
                 Log.d("bodyByte",new String(bodyByte));
+                //音楽再生
+                if((new String(bodyByte).indexOf("high")) != -1){
+                    severTimer.audioPlay();
+                }
                 // 通信に成功した
                 // テキストを取得する
 //                final InputStream in = con.getInputStream();

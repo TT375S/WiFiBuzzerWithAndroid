@@ -21,7 +21,7 @@ public class ServiceTimer extends Service {
     private int count = 0;
 
     //音楽の再生。本来、prepareとplayに分けるべきだが面倒なのでとりあえずこうしている。
-    private void audioPlay(){
+    public void audioPlay(){
         // インタンスを生成
         MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -71,15 +71,17 @@ public class ServiceTimer extends Service {
 
         //httpをGET--------ここから
         //HttpGetTaskを実行
+        HttpGetTask httpGetTask = new HttpGetTask();
+        httpGetTask.severTimer = this;
         try {
-            new HttpGetTask().execute(new URL("http://192.168.0.31/state"));
+            httpGetTask.execute(new URL("http://192.168.0.31/state"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         //httpをGET-------ここまで
 
         //とりあえずのserviceで音楽再生のテスト
-        audioPlay();
+        //audioPlay();
         Log.d( "START! TestService" , "count = "+ count );
         return super.onStartCommand(intent, flags, startId);
     }
