@@ -16,6 +16,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import static java.sql.Types.NULL;
+
 public final class HttpGetTask extends AsyncTask<URL, Void, String> {
 
     @Override
@@ -34,23 +36,35 @@ public final class HttpGetTask extends AsyncTask<URL, Void, String> {
 
             // HTTPレスポンスコード
             final int status = con.getResponseCode();
+            Log.d("ITWORK!", "1");
             if (status == HttpURLConnection.HTTP_OK) {
+                Log.d("ITWORK!", "2");
+                InputStream in = con.getInputStream();
+                byte bodyByte[] = new byte[1024];
+                in.read(bodyByte);
+                in.close();
+                Log.d("bodyByte",new String(bodyByte));
                 // 通信に成功した
                 // テキストを取得する
-                final InputStream in = con.getInputStream();
-                final String encoding = con.getContentEncoding();
-                final InputStreamReader inReader = new InputStreamReader(in, encoding);
-                final BufferedReader bufReader = new BufferedReader(inReader);
-                String line = null;
-                // 1行ずつテキストを読み込む
-                while((line = bufReader.readLine()) != null) {
-                    result.append(line);
-                }
-                bufReader.close();
-                inReader.close();
-                in.close();
+//                final InputStream in = con.getInputStream();
+//                final String encoding = con.getContentEncoding();
+//                Log.d("ITWORK!", "2.2");
+//                //ここが動かないみたい！
+//                final InputStreamReader inReader = new InputStreamReader(in, encoding);
+//                Log.d("ITWORK!", "2.25");
+//                final BufferedReader bufReader = new BufferedReader(inReader);
+//                Log.d("ITWORK!", "2.3");
+//                String line = null;
+//                Log.d("ITWORK!", "2.4");
+//                // 1行ずつテキストを読み込む
+//                while((line = bufReader.readLine()) != null) {
+//                    result.append(line);
+//                }
+//                bufReader.close();
+//                inReader.close();
+//                in.close();
             }
-
+            Log.d("ITWORK!", "3");
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
         } catch (ProtocolException e1) {
