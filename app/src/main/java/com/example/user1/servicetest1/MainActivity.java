@@ -10,6 +10,23 @@ package com.example.user1.servicetest1;
 
         import java.io.IOException;
 
+
+
+        import java.io.IOException;
+        import java.util.Timer;
+        import java.util.TimerTask;
+        import android.app.Service;
+        import android.content.Intent;
+        import android.content.res.AssetFileDescriptor;
+        import android.os.IBinder;
+        import android.provider.MediaStore;
+        import android.util.Log;
+        import android.media.AudioManager;
+        import android.media.MediaPlayer;
+
+        import java.net.MalformedURLException;
+        import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     //音楽の再生。本来、prepareとplayに分けるべきだが面倒なのでとりあえずこうしている。
@@ -54,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 //警告音の再生
                 //audioPlay();
 
+                //httpをGET--------ここから
+                //HttpGetTaskを実行
+        try {
+            new HttpGetTask().execute(new URL("http://www.google.co.jp"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+                //httpをGET-------ここまで
 
                 Intent intent = new Intent(getApplication(), ServiceTimer.class);
                 startService(intent);

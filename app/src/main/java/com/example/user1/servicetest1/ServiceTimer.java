@@ -12,16 +12,8 @@ import android.util.Log;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
-import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ServiceTimer extends Service {
 
@@ -76,6 +68,15 @@ public class ServiceTimer extends Service {
                 count++;
             }
         }, 0, 1000);
+
+        //httpをGET--------ここから
+        //HttpGetTaskを実行
+//        try {
+//            new HttpGetTask().execute(new URL("http://www.programing-style.com/android/android-api/android-httpurlconnection-get-text/"));
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+        //httpをGET-------ここまで
 
         //とりあえずのserviceで音楽再生のテスト
         audioPlay();
