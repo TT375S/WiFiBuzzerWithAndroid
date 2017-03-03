@@ -27,7 +27,7 @@ public class ServiceTimer extends Service {
 
     private Timer timer = null;
     private int count = 0;
-    //private MediaPlayer  mediaPlayer;
+
     //音楽の再生。本来、prepareとplayに分けるべきだが面倒なのでとりあえずこうしている。
     private void audioPlay(){
         // インタンスを生成
@@ -56,7 +56,6 @@ public class ServiceTimer extends Service {
 
     @Override
     public void onCreate() {
-        //mediaPlayer = new MediaPlayer();
         super.onCreate();
     }
 
@@ -64,38 +63,23 @@ public class ServiceTimer extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("service", "onStartCommand");
 
+        //このscheduleの中身しか定期実行されない。
         timer = new Timer();
         timer.schedule( new TimerTask(){
             @Override
             public void run(){
                 Log.d( "TestService" , "count = "+ count );
+
+                if(count == 5){
+                    Log.d( "HIT! TestService" , "count = "+ count );
+                }
                 count++;
             }
         }, 0, 1000);
 
         //とりあえずのserviceで音楽再生のテスト
         audioPlay();
-//            //        //音楽ファイル名, あるいはパス
-//        String filePath = "sample_music.mp3";
-//
-//        try {
-//            // assetsから mp3 ファイルを読み込み
-//            AssetFileDescriptor afdescripter = getAssets().openFd(filePath);
-//            // MediaPlayerに読み込んだ音楽ファイルを指定
-//            mediaPlayer.setDataSource(afdescripter.getFileDescriptor(),
-//                    afdescripter.getStartOffset(),
-//                    afdescripter.getLength());
-//            // 音量調整を端末のボタンに任せる
-//            //何故かここだと読み込めないのでコメントアウト
-//            //setVolumeControlStream(AudioManager.STREAM_MUSIC);
-//            mediaPlayer.prepare();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//// 再生する
-//        mediaPlayer.start();
-
-
+        Log.d( "START! TestService" , "count = "+ count );
         return super.onStartCommand(intent, flags, startId);
     }
 
