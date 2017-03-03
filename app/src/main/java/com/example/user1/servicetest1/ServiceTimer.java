@@ -71,11 +71,11 @@ public class ServiceTimer extends Service {
 
         //httpをGET--------ここから
         //HttpGetTaskを実行
-//        try {
-//            new HttpGetTask().execute(new URL("http://www.programing-style.com/android/android-api/android-httpurlconnection-get-text/"));
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            new HttpGetTask().execute(new URL("http://192.168.0.31/state"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         //httpをGET-------ここまで
 
         //とりあえずのserviceで音楽再生のテスト

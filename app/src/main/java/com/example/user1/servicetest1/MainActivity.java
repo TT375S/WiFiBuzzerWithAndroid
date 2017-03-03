@@ -73,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //httpをGET--------ここから
                 //HttpGetTaskを実行
-        try {
-            new HttpGetTask().execute(new URL("http://www.google.co.jp"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            new HttpGetTask().execute(new URL("http://192.168.0.31/state"));
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
                 //httpをGET-------ここまで
 
                 Intent intent = new Intent(getApplication(), ServiceTimer.class);
