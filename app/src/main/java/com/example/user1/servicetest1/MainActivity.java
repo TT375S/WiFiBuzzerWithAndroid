@@ -12,10 +12,8 @@ package com.example.user1.servicetest1;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //音楽の再生。本来、prepareとplayに分けるべきだが面倒なのでとりあえずこうしている。
     private void audioPlay(){
-
-
         // インタンスを生成
         MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //警告音の再生
-                audioPlay();
+                //audioPlay();
 
 
                 Intent intent = new Intent(getApplication(), ServiceTimer.class);
